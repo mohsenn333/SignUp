@@ -1,0 +1,61 @@
+﻿@model SignUp.Models.UserModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="text-right" dir="rtl">
+
+    <div>
+        <h4>جزئیات اطلاعات کاربر</h4>
+        <hr/>
+        <dl class="row">
+            <dt class="col-sm-2">
+                نام و نام خانوادگی :
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.FullName)
+            </dd>
+            <dt class="col-sm-2">
+                موبایل :
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Mobile)
+            </dd>
+            <dt class="col-sm-2">
+                نام کاربری : 
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.UserName)
+            </dd>
+            <dt class="col-sm-2">
+                تلفن ثابت :
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Phone)
+            </dd>
+            <dt class="col-sm-2">
+                ایمیل :
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt class="col-sm-2">
+                آدرس :
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+            <dt class="col-sm-2">
+                رمز عبور :
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Password)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.ID"><input type="button" value="ویرایش" class="btn btn-primary" /></a> |
+        <a asp-action="Index"><input type="button" value="انصراف" class="btn btn-info" /></a>
+    </div>
+</div>

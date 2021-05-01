@@ -1,0 +1,65 @@
+﻿@model SignUp.Models.UserModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="text-right" dir="rtl">
+    <h4>ویرایش اطلاعات</h4>
+    <hr/>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ID"/>
+                <div class="form-group">
+                    <label asp-for="FullName" class="control-label">نام و نام خانوادگی</label>
+                    <input asp-for="FullName" class="form-control"/>
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Mobile" class="control-label">موبایل</label>
+                    <input asp-for="Mobile" class="form-control"/>
+                    <span asp-validation-for="Mobile" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UserName" class="control-label">نام کاربری</label>
+                    <input asp-for="UserName" class="form-control"/>
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Phone" class="control-label">تلفن ثابت</label>
+                    <input asp-for="Phone" class="form-control"/>
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label">ایمیل</label>
+                    <input asp-for="Email" class="form-control"/>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Address" class="control-label">آدرس</label>
+                    <input asp-for="Address" class="form-control"/>
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label">رمز عبور</label>
+                    <input asp-for="Password" class="form-control" type="password"/>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="ثبت تغییرات" class="btn btn-primary" />
+                    <a asp-action="Index"><input type="button" value="انصراف" class="btn btn-info" /></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            @*<a asp-action="Index"><input type="button" value="انصراف" class="btn btn-info" /></a>*@
+                </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

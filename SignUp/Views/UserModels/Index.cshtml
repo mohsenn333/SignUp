@@ -1,0 +1,81 @@
+﻿@model IEnumerable<SignUp.Models.UserModel>
+
+@{
+    ViewData["Title"] = "List Of User";
+}
+<div class="text-right" dir="rtl">
+    <h1>لیست کاربران</h1>
+
+    @*<p>
+            <a asp-action="Create">Create New</a>
+        </p>*@
+    <table class="table">
+        <thead class="text-center">
+            <tr>
+                <th>
+                    نام و نام خانوادگی
+                    @*@Html.DisplayNameFor(model => model.FullName)*@
+                </th>
+                <th>
+                    شماره موبایل
+                    @*@Html.DisplayNameFor(model => model.Mobile)*@
+                </th>
+                <th>
+                    نام کاربری
+                    @*@Html.DisplayNameFor(model => model.UserName)*@
+                </th>
+                <th>
+                    شماره ثابت
+                    @* @Html.DisplayNameFor(model => model.Phone)*@
+                </th>
+                <th>
+                    ایمیل
+                    @*@Html.DisplayNameFor(model => model.Email)*@
+                </th>
+                <th>
+                    آدرس
+                    @*@Html.DisplayNameFor(model => model.Address)*@
+                </th>
+                <th>
+                    رمز عبور
+                    @*@Html.DisplayNameFor(model => model.Password)*@
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mobile)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Password)
+                    </td>
+                    <td>
+
+                        <a asp-action="Edit" asp-route-id="@item.ID"><input type="button" value="ویرایش" class="btn btn-primary" /></a>
+                        <a asp-action="Details" asp-route-id="@item.ID"> <input type="button" value="جزئیات" class="btn btn-info" /></a>
+                        <a asp-action="Delete" asp-route-id="@item.ID"><input type="button" value="حذف" class="btn btn-danger" /></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
