@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SignUp.Models;
+using System.Net.Mail;
+using System.Web;
+
 
 namespace SignUp.Controllers
 {
@@ -17,6 +20,18 @@ namespace SignUp.Controllers
         {
             _context = context;
         }
+
+        [BindProperty]
+        public UserModel userModel1 { get; set; }
+        //public void OnGet();
+        //Get Return view
+        [HttpGet]
+        public IActionResult SendEmail()
+        {
+
+            return View();
+        }
+
 
         // GET: UserModels
         public async Task<IActionResult> Index()
@@ -48,17 +63,31 @@ namespace SignUp.Controllers
             return View();
         }
 
-        // POST: UserModels/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+ 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,FullName,Mobile,UserName,Phone,Email,Address,Password")] UserModel userModel)
+          public async Task<IActionResult> Create(UserModel userModel,EmailMeesage emailMeesage )
         {
             if (ModelState.IsValid)
             {
                 _context.Add(userModel);
                 await _context.SaveChangesAsync();
+                //ارسال ایمیل
+                MailMessage mail = new MailMessage();
+                mail.To.Add(userModel.Email);
+                mail.From = new MailAddress("testusersignup9@Gmail.com");
+                mail.Subject = "WellCome";
+                string Body = "ثبت نام شما با موفقیت انجام شد";
+                mail.Body = Body;
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new System.Net.NetworkCredential("testusersignup9", "4060440590"); // Enter seders User name and password  
+                smtp.EnableSsl = true;
+                smtp.Send(mail);
+                //ارسال ایمیل
                 return RedirectToAction(nameof(Index));
             }
             return View(userModel);
@@ -81,11 +110,9 @@ namespace SignUp.Controllers
         }
 
         // POST: UserModels/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("ID,FullName,Mobile,UserName,Phone,Email,Address,Password")] UserModel userModel)
+        public async Task<IActionResult> Edit(long id,UserModel userModel)
         {
             if (id != userModel.ID)
             {

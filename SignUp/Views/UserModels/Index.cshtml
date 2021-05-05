@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<SignUp.Models.UserModel>
 
+
 @{
     ViewData["Title"] = "List Of User";
 }
@@ -46,35 +47,39 @@
         <tbody class="text-center">
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FullName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Mobile)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Phone)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Address)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Password)
-                    </td>
-                    <td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mobile)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
 
-                        <a asp-action="Edit" asp-route-id="@item.ID"><input type="button" value="ویرایش" class="btn btn-primary" /></a>
-                        <a asp-action="Details" asp-route-id="@item.ID"> <input type="button" value="جزئیات" class="btn btn-info" /></a>
-                        <a asp-action="Delete" asp-route-id="@item.ID"><input type="button" value="حذف" class="btn btn-danger" /></a>
-                    </td>
-                </tr>
+                    <a asp-action="Edit" asp-route-id="@item.ID"><input type="button" value="ویرایش" class="btn btn-primary" /></a>
+                    <a asp-action="Details" asp-route-id="@item.ID"> <input type="button" value="جزئیات" class="btn btn-info" /></a>
+                    <a asp-action="Delete" asp-route-id="@item.ID"><input type="button" value="حذف" class="btn btn-danger" /></a>
+                    
+                    @*</td>
+        <a asp-action="Delete" asp-route-id="@item.ID"><input type="button" value="ارسال ایمیل فعال سازی" class="btn btn-danger" /></a>
+        <td>*@
+                </td>
+            </tr>
             }
         </tbody>
     </table>
