@@ -25,14 +25,8 @@ namespace SignUp.Controllers
         public UserModel userModel1 { get; set; }
         //public void OnGet();
         //Get Return view
+
         [HttpGet]
-        public IActionResult SendEmail()
-        {
-
-            return View();
-        }
-
-
         // GET: UserModels
         public async Task<IActionResult> Index()
         {
@@ -63,10 +57,10 @@ namespace SignUp.Controllers
             return View();
         }
 
- 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-          public async Task<IActionResult> Create(UserModel userModel,EmailMeesage emailMeesage )
+          public async Task<IActionResult> Create(UserModel userModel)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +72,7 @@ namespace SignUp.Controllers
                 mail.From = new MailAddress("testusersignup9@Gmail.com");
                 mail.Subject = "WellCome";
                 string Body = "ثبت نام شما با موفقیت انجام شد";
-                mail.Body = Body;
+                mail.Body = Body ;
                 mail.IsBodyHtml = true;
                 SmtpClient smtp = new SmtpClient();
                 smtp.Host = "smtp.gmail.com";
