@@ -99,6 +99,32 @@ namespace SignUpWebAPI.Controllers
             else { return BadRequest("Invalid Data"); }   
         }
 
+        [HttpPut]
+        public async Task<IActionResult> Put(UserModel user)
+        {
+            var usermodels = await _context.UserModel.FindAsync(user.ID);
+
+            usermodels.FullName = user.FullName;
+            usermodels.Mobile = user.Mobile;
+            usermodels.UserName = user.UserName;
+            usermodels.Phone = user.Phone;
+            usermodels.Email = user.Email;
+            usermodels.Address = user.Address;
+            usermodels.Password = user.Password;
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(long id)
+        {
+            var usermodel = await _context.UserModel.FindAsync(id);
+            _context.UserModel.Remove(usermodel);
+            await _context.SaveChangesAsync();
+            return Ok();
+
+        }
+
 
     }
 }
