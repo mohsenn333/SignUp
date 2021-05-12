@@ -1,7 +1,9 @@
 import { UserModel } from './../Model/user-model.model';
 import { Component, OnInit } from '@angular/core';
 import { SignUpServService } from '../servises/sign-up-serv.service';
-import { Router } from '@angular/router';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
+import { Observable, pipe } from 'rxjs';
+
 
 @Component({
   selector: 'app-user-create',
@@ -10,6 +12,9 @@ import { Router } from '@angular/router';
 })
 export class UserCreateComponent  {
 user:UserModel=new UserModel();
+
+
+
   constructor(private router: Router,private signserv:SignUpServService) { }
 
   createUser(): void {
@@ -17,7 +22,8 @@ user:UserModel=new UserModel();
         .subscribe( data => {
           alert("Employee created successfully.");
           this.router.navigate(['/User-List']);
-        });
+        }, data => alert("ارسال اطلاعات با خطا مواجه گردید")
+        );
 
   };
 

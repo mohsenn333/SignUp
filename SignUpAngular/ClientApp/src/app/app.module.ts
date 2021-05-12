@@ -10,6 +10,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { UserCreateComponent } from './user-create/user-create.component';
 import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import { UserUpdateComponent } from './user-update/user-update.component';
+import { NgHttpLoaderModule } from 'ng-http-loader';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { UserUpdateComponent } from './user-update/user-update.component';
     NgbModule,
     NgbPaginationModule,
     NgbAlertModule,
-    FormsModule
+    FormsModule,
+    NgHttpLoaderModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
