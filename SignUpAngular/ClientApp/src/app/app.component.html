@@ -1,11 +1,17 @@
+<div class="text-right" dir="rtl">
+
+
+
+
 <div class="container"  style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-  <div class="topnav">
-    <a routerLink="/" routerLinkActive="active">Home</a>
-    <a routerLink="/User-List" routerLinkActive="active">User List</a>
-    <a routerLink="/User-Create" routerLinkActive="active">User Create</a>
+  <div class="topnav" dir="rtl" >
+    <a routerLink="/" routerLinkActive="active">خانه</a>
+    <a routerLink="/User-List" routerLinkActive="active">لیست کاربران</a>
+    <a routerLink="/User-Create" routerLinkActive="active">ایجاد کاربر جدید</a>
   </div>
   </div>
   <div class="container"  style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
     <router-outlet></router-outlet>
     <ng-http-loader></ng-http-loader>
   </div>
+</div>

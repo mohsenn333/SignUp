@@ -1,35 +1,51 @@
-<h2>Add Employee</h2>
-<form>
+<div class="text-right" dir="rtl">
+<h2>ثبت یوزر جدید</h2>
+<hr>
+<form >
     <div class="form-group">
-        <label for="name">Fullname:</label>
-        <input [(ngModel)]="user.fullname" name="fullname" class="form-control" id="fullname">
+        <label for="name">نام و نام خانوادگی:</label>
+        <input required minlength="3" [(ngModel)]="user.fullname" name="fullname" class="form-control" id="fullname" #fullname="ngModel">
+        <!-- validator -->
+        <div *ngIf="fullname.invalid && (fullname.dirty || fullname.touched)" class="alert alert-danger">
+
+          <div *ngIf="fullname.errors.required">
+            فیلد نام اجباری است
+          </div>
+          <div *ngIf="fullname.errors.minlength">
+            حداقل 3 کاراکتر برای نام اجباریست
+          </div>
+
+        </div>
+        <!-- validator -->
+
     </div>
     <div class="form-group">
-      <label for="name">Mobile:</label>
-      <input [(ngModel)]="user.mobile" name="mobile" class="form-control" id="mobile">
+      <label for="name">موبایل:</label>
+      <input type="number" [(ngModel)]="user.mobile" name="mobile" class="form-control" id="mobile">
   </div>
   <div class="form-group">
-    <label for="name">Username:</label>
+    <label for="name">نام کاربری:</label>
     <input [(ngModel)]="user.username" name="username" class="form-control" id="username">
 </div>
 <div class="form-group">
-  <label for="name">Phone:</label>
-  <input [(ngModel)]="user.phone" name="phone" class="form-control" id="phone">
+  <label for="name">تلفن تماس:</label>
+  <input type="number" [(ngModel)]="user.phone" name="phone" class="form-control" id="phone">
 </div>
 <div class="form-group">
-  <label for="name">Email:</label>
+  <label for="name">ایمیل:</label>
   <input [(ngModel)]="user.email" name="email" class="form-control" id="email">
 </div>
 <div class="form-group">
-  <label for="name">Address:</label>
+  <label for="name">آدرس:</label>
   <input [(ngModel)]="user.address" name="address" class="form-control" id="address">
 </div>
 <div class="form-group">
-  <label for="name">Password:</label>
-  <input [(ngModel)]="user.password" name="password" class="form-control" id="password">
+  <label for="name">رمز عبور:</label>
+  <input type="password" [(ngModel)]="user.password" name="password" class="form-control" id="password">
 </div>
     <div class="form-group text-center">
-        <button class="btn btn-success" (click)="createUser()">Create</button>
+        <button class="btn btn-success" (click)="createUser()">ثبت کاربر جدید</button>
     </div>
 
 </form>
+</div>

@@ -1,35 +1,35 @@
-<p>List Of User</p>
-
-
+<div class="text-right" dir="rtl">
+<h2>لیست کاربران</h2>
+<br>
     <table class="table table-striped">
         <thead>
             <tr>
                 <td>
-                    id
+                    #
                 </td>
                 <td>
-                    FullName
+                    نام
                 </td>
                 <td>
-                    Mobile
+                    موبایل
                 </td>
                 <td>
-                    UserName
+                    نام کاربری
                 </td>
                 <td>
-                    Phone
+                    تلفن
                 </td>
                 <td>
-                    Email
+                    ایمیل
                 </td>
                 <td>
-                    Address
+                    آدرس
                 </td>
                 <td>
-                    Password
+                    رمز عبور
                 </td>
                 <td>
-                  action
+
 
                 </td>
 
@@ -64,12 +64,12 @@
                     {{user.password}}
                 </td>
                 <td>
-                   <a [routerLink]="['/update', user.id]" class="btn btn-info">Update</a> &nbsp;
-                  <button class="btn btn-danger" (click)="deleteUser(user)"> Delete</button>
+                   <a [routerLink]="['/update', user.id]" class="btn btn-info">ویرایش</a> &nbsp;
+                  <button class="btn btn-danger" (click)="deleteUser(user)"> حذف</button>
               </td>
 
             </tr>
         </tbody>
     </table>
-
+  </div>
 

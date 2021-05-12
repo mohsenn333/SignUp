@@ -8,6 +8,7 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using SignUpWebAPI.Models;
+using System.Net;
 
 namespace SignUpWebAPI.Controllers
 {
@@ -47,8 +48,7 @@ namespace SignUpWebAPI.Controllers
         [HttpGet("ByEmail/{Email}")]
         public async Task<IActionResult> Get(String Email)
         {
-            var userModels = await _context.UserModel
-            .FirstOrDefaultAsync(m => m.Email == Email);
+            var userModels = await _context.UserModel.FirstOrDefaultAsync(m => m.Email == Email);
             if (userModels == null)
             {
                 return NotFound();
@@ -60,43 +60,50 @@ namespace SignUpWebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(UserModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return BadRequest("Invalid Data");
+
+            var userModel = new UserModel
             {
-                var users = new UserModel
-                {
-                    FullName = model.FullName,
-                    Mobile = model.Mobile,
-                    UserName = model.UserName,
-                    Phone = model.Phone,
-                    Email = model.Email,
-                    Address = model.Address,
-                    Password = model.Password,
-                };
-                await _context.AddAsync(users);
-                await _context.SaveChangesAsync();
-                //ارسال ایمیل
-                MailMessage mail = new MailMessage();
-                mail.To.Add(users.Email);
-                mail.From = new MailAddress("testusersignup9@Gmail.com");
-                mail.Subject = "WellCome";
-                string Body = "ثبت نام شما با موفقیت انجام شد";
-                mail.Body = Body;
-                mail.IsBodyHtml = true;
-                SmtpClient smtp = new SmtpClient();
-                smtp.Host = "smtp.gmail.com";
-                smtp.Port = 587;
-                smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new System.Net.NetworkCredential("testusersignup9", "4060440590"); // Enter seders User name and password  
-                smtp.EnableSsl = true;
-                smtp.Send(mail);
-                //ارسال ایمیل
-                //پر کردن آی دی برای کامل کردن مدل جهت برگشت
-                model.ID = users.ID;
+                FullName = model.FullName,
+                Mobile = model.Mobile,
+                UserName = model.UserName,
+                Phone = model.Phone,
+                Email = model.Email,
+                Address = model.Address,
+                Password = model.Password,
+            };
 
-                return Ok(model);
+            await _context.AddAsync(userModel);
+            await _context.SaveChangesAsync();
 
-            }
-            else { return BadRequest("Invalid Data"); }   
+            //ارسال ایمیل
+            var mailMessage = new MailMessage()
+            {
+                Subject = "WellCome",
+                Body = "ثبت نام شما با موفقیت انجام شد",
+                IsBodyHtml = true
+            };
+            mailMessage.To.Add(userModel.Email);
+            mailMessage.From = new MailAddress("testusersignup9@Gmail.com");
+
+            //sending email
+            var smtp = new SmtpClient()
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                UseDefaultCredentials = false,
+                EnableSsl = true,
+            };
+            smtp.Credentials = new NetworkCredential("testusersignup9", "4060440590"); // Enter seders User name and password  
+            smtp.Send(mailMessage);
+
+            //ارسال ایمیل
+            //پر کردن آی دی برای کامل کردن مدل جهت برگشت
+            model.ID = userModel.ID;
+
+            return Ok(model);
+
         }
 
         [HttpPut]
@@ -111,6 +118,7 @@ namespace SignUpWebAPI.Controllers
             usermodels.Email = user.Email;
             usermodels.Address = user.Address;
             usermodels.Password = user.Password;
+
             await _context.SaveChangesAsync();
 
             return Ok();
@@ -119,6 +127,7 @@ namespace SignUpWebAPI.Controllers
         public async Task<IActionResult> Delete(long id)
         {
             var usermodel = await _context.UserModel.FindAsync(id);
+
             _context.UserModel.Remove(usermodel);
             await _context.SaveChangesAsync();
             return Ok();
