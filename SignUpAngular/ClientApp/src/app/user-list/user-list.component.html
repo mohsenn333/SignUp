@@ -1,0 +1,75 @@
+<p>List Of User</p>
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>
+                    id
+                </td>
+                <td>
+                    FullName
+                </td>
+                <td>
+                    Mobile
+                </td>
+                <td>
+                    UserName
+                </td>
+                <td>
+                    Phone
+                </td>
+                <td>
+                    Email
+                </td>
+                <td>
+                    Address
+                </td>
+                <td>
+                    Password
+                </td>
+                <td>
+                  action
+
+                </td>
+
+            </tr>
+
+        </thead>
+        <tbody >
+            <tr *ngFor="let user of users" >
+                <td >
+                    {{user.id}}
+                </td>
+                <td>
+                    {{user.fullName}}
+
+                </td>
+                <td >
+                    {{user.mobile}}
+                </td>
+                <td >
+                    {{user.userName}}
+                </td>
+                <td >
+                    {{user.phone}}
+                </td>
+                <td >
+                    {{user.email}}
+                </td>
+                <td >
+                    {{user.address}}
+                </td>
+                <td >
+                    {{user.password}}
+                </td>
+                <td>
+                   <a [routerLink]="['/update', user.id]" class="btn btn-info">Update</a> &nbsp;
+                  <button class="btn btn-danger" (click)="deleteUser(user)"> Delete</button>
+              </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+
